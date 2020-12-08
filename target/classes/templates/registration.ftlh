@@ -2,7 +2,7 @@
 <#import "parts/login.ftl" as l>
 
 <@c.page>
-    Add new user
+    Зареєструйтесь!
     ${message!}
     <@l.register "/registration" />
 </@c.page>

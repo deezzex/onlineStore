@@ -26,6 +26,6 @@ public class UserSevice implements UserDetailsService {
             throw new UsernameNotFoundException("User not found");
         }
 
-        return (UserDetails) user;
+        return user;
     }
 }

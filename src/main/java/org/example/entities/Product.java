@@ -5,10 +5,7 @@
 
 package org.example.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Product {
@@ -20,16 +17,26 @@ public class Product {
     private String descriptions;
     private String producer;
     private Long price;
+    private String fileName;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="user_id")
+    private User author;
+
+    public String getAuthorName(){
+        return author != null ? author.getUsername() : "<none>";
+    }
 
     public Product() {
     }
 
-    public Product(String name, String consist, String descriptions, String producer, Long price) {
+    public Product(String name, String consist, String descriptions, String producer, Long price, User user) {
         this.name = name;
         this.consist = consist;
         this.descriptions = descriptions;
         this.producer = producer;
         this.price = price;
+        this.author = user;
     }
 
     public Long getId() {
@@ -78,5 +85,21 @@ public class Product {
 
     public void setProducer(String producer) {
         this.producer = producer;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }
