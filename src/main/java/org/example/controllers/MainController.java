@@ -42,7 +42,7 @@ public class MainController {
     @GetMapping("/main")
     public String main(@RequestParam(required = false, defaultValue = "") String filter,@AuthenticationPrincipal User user, Model model) {
         Iterable<Product> products = productRepo.findAll();
-        Set<String> roles = Arrays.stream(Role.values()).map(Role::name).collect(Collectors.toSet());
+
         if (filter != null && !filter.isEmpty()) {
             products = productRepo.findByName(filter);
         } else {
@@ -51,7 +51,7 @@ public class MainController {
 
         model.addAttribute("products", products);
         model.addAttribute("filter", filter);
-        model.addAttribute("roles",roles);
+
         return "main";
     }
 
@@ -77,6 +77,7 @@ public class MainController {
 
         return "main";
     }
+
     private void saveFile(Product product, @RequestParam("file") MultipartFile file) throws IOException {
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);

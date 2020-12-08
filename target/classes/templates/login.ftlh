@@ -3,7 +3,6 @@
 
 <@c.page>
     <p>Ввійдіть в обліковий запис!</p>
-    <@l.login "/login" />
-    <p>У вас ще немає облікового запису?</p>
-    <a href="/registration">Зареєстуйтесь!</a>
+    <@l.login "/login" false/>
+
 </@c.page>

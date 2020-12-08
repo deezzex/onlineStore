@@ -4,5 +4,5 @@
 <@c.page>
     Зареєструйтесь!
     ${message!}
-    <@l.register "/registration" />
+    <@l.register "/registration" true/>
 </@c.page>

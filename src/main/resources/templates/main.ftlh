@@ -1,45 +1,67 @@
 <#import "parts/common.ftl" as c>
 <#import "parts/login.ftl" as l>
+<#include "parts/security.ftl">
 
 <@c.page>
-    <div>
-        <@l.logout />
-        <p><a href="/user">Список користувачів</a></p>
-    </div>
-
-    <div>
-        <form method="post" enctype="multipart/form-data">
-            <input type="text" name="name" placeholder="Товар" />
-            <input type="text" name="price" placeholder="Ціна">
-            <input type="text" name="consist" placeholder="Склад">
-            <input type="text" name="description" placeholder="Опис">
-            <input type="text" name="producer" placeholder="Виробник">
-            <input type="file" name="file" placeholder="">
-            <input type="hidden" name="_csrf" value="${_csrf.token}" />
-            <button type="submit">Додати</button>
-        </form>
-    </div>
-
-    <div>Список товарів</div>
-    <form method="get" action="/main">
-        <input type="text" name="filter" value="${filter!}">
-        <button type="submit">Знайти</button>
-    </form>
-    <#list products as product>
-        <div>
-            <b>${product.name}</b>
-            <span>${product.consist}</span>
-            <span>${product.descriptions}</span>
-            <span>${product.producer}</span>
-            <i>${product.price}</i>
-            <span>${product.authorName}</span>
-            <div>
-                <#if product.fileName??>
-                    <img src="/img/${product.fileName}">
-                </#if>
+    <#if isAdmin>
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Добавити новий товар</a>
+        <div class="collapse" id="collapseExample">
+            <div class="form-group mt-3">
+                <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="name" placeholder="Назва" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="consist" placeholder="Склад">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="description" placeholder="Опис">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="producer" placeholder="Виробник">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="price" placeholder="Ціна">
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-file">
+                            <input type="file" name="file" id="customFile">
+                            <label class="custom-file-label" for="customFile">Вибрати фото</label>
+                        </div>
+                    </div>
+                    <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Добавити товар</button>
+                    </div>
+                </form>
             </div>
         </div>
-    <#else>
-        Немає такого товару
-    </#list>
+    </#if>
+    <div class="container mt-3"></div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <form method="get" action="/main" class="form-inline">
+                <div class="col-sm-5 col-form-label form-group row">
+                    <input type="text" name="filter" class="form-control" value="${filter?ifExists}" placeholder="Пошук за назвою">
+                </div>
+                <button type="submit" class="btn btn btn-success ml-2">Шукати</button>
+            </form>
+        </div>
+    </div>
+    <div class="card-columns">
+        <#list products as product>
+            <div class="card my-3 text-center" style="width: 18rem;">
+
+                    <img src="/img/${product.fileName!}" class="card-img-top">
+                <h4 class="card-title ml-3">${product.name}</h4>
+                <h6 class="card-subtitle mb-2 ml-3 text-muted">${product.producer}</h6>
+                <p class="card-text ml-3">Ціна: ${product.price} грн.</p>
+                <a href="#" class="btn btn-info m-3 ">Детальніше</a>
+            </div>
+
+        <#else>
+            No message
+        </#list>
+    </div>
 </@c.page>

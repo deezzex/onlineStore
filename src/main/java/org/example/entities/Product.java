@@ -23,10 +23,6 @@ public class Product {
     @JoinColumn(name="user_id")
     private User author;
 
-    public String getAuthorName(){
-        return author != null ? author.getUsername() : "<none>";
-    }
-
     public Product() {
     }
 
@@ -101,5 +97,8 @@ public class Product {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+    public String getAuthorName(){
+        return author != null ? author.getUsername() : "<none>";
     }
 }
