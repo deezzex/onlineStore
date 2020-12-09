@@ -10,9 +10,9 @@
 
         </head>
 
-        <body>
+        <body class="bg-dark bg-gradient">
         <#include "navbar.ftl">
-            <div class="container mt-5">
+            <div class="container mt-7 p-5 bg-light">
                 <#nested>
             </div>
 

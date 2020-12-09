@@ -3,8 +3,10 @@
 <#include "parts/security.ftl">
 
 <@c.page>
+    <img src="/img/1.jpg" class="d-block w-100 border border-9 border-primary" alt="...">
+
     <#if isAdmin>
-        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <a class="btn btn-primary mt-3" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
             Добавити новий товар</a>
         <div class="collapse" id="collapseExample">
             <div class="form-group mt-3">
@@ -38,20 +40,21 @@
             </div>
         </div>
     </#if>
-    <div class="container mt-3"></div>
+    <div class="container mt-3">
     <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col">
             <form method="get" action="/main" class="form-inline">
-                <div class="col-sm-5 col-form-label form-group row">
-                    <input type="text" name="filter" class="form-control" value="${filter?ifExists}" placeholder="Пошук за назвою">
+                <div class="col-sm-11 col-form-label form-group row">
+                    <input type="text" name="filter" class="form-control col" value="${filter!}" placeholder="Пошук за назвою">
                 </div>
                 <button type="submit" class="btn btn btn-success ml-2">Шукати</button>
             </form>
         </div>
     </div>
+    </div>
     <div class="card-columns">
         <#list products as product>
-            <div class="card my-3 text-center" style="width: 18rem;">
+            <div class="card my-3 text-center border border-primary border-5 rounded" style="width: 18rem;">
 
                     <img src="/img/${product.fileName!}" class="card-img-top">
                 <h4 class="card-title ml-3">${product.name}</h4>
@@ -61,7 +64,7 @@
             </div>
 
         <#else>
-            No message
+           <h4>Такого товару немає</h4>
         </#list>
     </div>
 </@c.page>

@@ -9,21 +9,23 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/main">Товари</a>
-                </li>
+                 <li class="nav-item">
+                     <div class="spinner-border text-primary  mr-3 mt-3" role="status">
+                         <span class="visually-hidden"></span>
+                     </div>
 
-            <#if isAdmin>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user">Список користувачів</a>
-                </li>
-            </#if>
-            <#if user??>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/profile">Профіль</a>
-                </li>
-            </#if>
+                 <div class="btn-group mb-3" role="group" aria-label="Basic outlined example">
+
+                     <a type="button"  href="/main" class="btn btn-outline-light">Каталог товарів</a>
+                     <#if isAdmin>
+                         <a type="button" href="/user" class="btn btn-outline-light">Список користувачів</a>
+                     </#if>
+                     <#if user??>
+                         <a type="button" href="/user/profile" class="btn btn-outline-light">Мій профіль</a>
+                     </#if>
+                 </div>
         </ul>
+
         <span class="badge  bg-warning text-dark navbar-text mr-3"> ${name} </span>
 
         <#if user??><@l.logout /></#if>

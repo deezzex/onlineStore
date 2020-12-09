@@ -37,7 +37,7 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">User Name :</label>
             <div class="col-sm-6">
-                <input type="text" name="email" class="form-control" placeholder="Email" />
+                <input type="email" name="email" class="form-control" placeholder="Email" />
             </div>
         </div>
 
@@ -58,6 +58,12 @@
         <input type="hidden" name="_csrf" value="${_csrf.token}" />
         <button class="btn btn-primary" type="submit"><#if isRegisterForm>Заруєструватись<#else>Увійти</#if></button>
     </form>
+    <div class="alert alert-success mt-5" role="alert">
+        <h4 class="alert-heading">Круто!</h4>
+        <p>Після того як нажмеш кнопку "Зареєструватись" на вказану електронну пошту прийде код активації, будь-ласка перейди по посиланню яке буде в листі.</p>
+        <hr>
+        <p class="mb-0">Хорошого для.</p>
+    </div>
 </#macro>
 
 <#macro logout>

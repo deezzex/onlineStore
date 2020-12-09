@@ -21,6 +21,7 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private String email;
+    private String activationCode;
     private String firstName;
     private String lastName;
     private boolean active;
@@ -120,5 +121,13 @@ public class User implements UserDetails {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
     }
 }

@@ -1,18 +1,18 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
-    <strong>Список користувачів</strong>
+    <h3>Список користувачів</h3>
 
-    <table>
-        <thead>
+    <table class="table table-primary table-striped table-hover table-bordered mt-5">
+        <thead class="table-dark">
         <tr>
-            <th>Id</th>
-            <th>Нікнейм</th>
-            <th>Імя</th>
-            <th>Прізвище</th>
-            <th>Імейл</th>
-            <th>Права доступу</th>
-            <th></th>
+            <th scope="col">Id</th>
+            <th scope="col">Нікнейм</th>
+            <th scope="col">Імя</th>
+            <th scope="col">Прізвище</th>
+            <th scope="col">Імейл</th>
+            <th scope="col">Права доступу</th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -24,14 +24,14 @@
                 <td>${user.lastName!}</td>
                 <td>${user.email!}</td>
                 <td><#list user.roles as role>${role}<#sep>, </#list></td>
-                <td><a href="/user/${user.id}">Редагувати</a></td>
+                <td><a href="/user/${user.id}" type="button" class="btn btn-secondary">Редагувати</a></td>
             </tr>
         </#list>
         </tbody>
     </table>
     <div>
         <br>
-        <a href="/main">Повернутись</a>
+        <a href="/main" type="button" class="btn btn-primary">Повернутись</a>
     </div>
 
 
