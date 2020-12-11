@@ -18,6 +18,9 @@ public class Product {
     private String producer;
     private Long price;
     private String fileName;
+    private String subtitle;
+    private String weight;
+    private String evaluationForm;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
@@ -26,12 +29,15 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, String consist, String descriptions, String producer, Long price, User user) {
+    public Product(String name, String consist, String descriptions, String producer, Long price,String subtitle,String weight,String evaluationForm, User user) {
         this.name = name;
         this.consist = consist;
         this.descriptions = descriptions;
         this.producer = producer;
         this.price = price;
+        this.subtitle = subtitle;
+        this.weight = weight;
+        this.evaluationForm = evaluationForm;
         this.author = user;
     }
 
@@ -98,6 +104,31 @@ public class Product {
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getEvaluationForm() {
+        return evaluationForm;
+    }
+
+    public void setEvaluationForm(String evaluationForm) {
+        this.evaluationForm = evaluationForm;
+    }
+
     public String getAuthorName(){
         return author != null ? author.getUsername() : "<none>";
     }

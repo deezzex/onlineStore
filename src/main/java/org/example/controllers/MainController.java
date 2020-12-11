@@ -12,6 +12,10 @@ import org.example.entities.User;
 import org.example.repos.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -36,8 +40,7 @@ public class MainController {
     @Autowired
     private ProductRepo productRepo;
 
-    @Value("${upload.path}")
-    private String uploadPath;
+
 
     @GetMapping("/")
     public String greeting(Map<String, Object> model) {
@@ -45,59 +48,18 @@ public class MainController {
     }
 
     @GetMapping("/main")
-    public String main(@RequestParam(required = false, defaultValue = "") String filter,@AuthenticationPrincipal User user, Model model) {
-        Iterable<Product> products = productRepo.findAll();
+    public String main(@RequestParam(required = false, defaultValue = "") String filter,
+                       @PageableDefault(sort = {"id"},direction = Sort.Direction.DESC) Pageable pageable,
+                       Model model) {
+        ProductController.filterForProducts(model, filter, pageable, productRepo);
 
-        if (filter != null && !filter.isEmpty()) {
-            products = productRepo.findByName(filter);
-        } else {
-            products = productRepo.findAll();
-        }
-
-        model.addAttribute("products", products);
-        model.addAttribute("filter", filter);
+        model.addAttribute("url","/main");
 
         return "main";
     }
 
-    @PostMapping("/main")
-    public String add(
-            @AuthenticationPrincipal User user,
-            @RequestParam String name,
-            @RequestParam String consist,
-            @RequestParam String description,
-            @RequestParam String producer,
-            @RequestParam Long price,
-            @RequestParam("file") MultipartFile file,
-            Map<String, Object> model
-    ) throws IOException {
 
-        Product product = new Product(name,consist,description,producer,price,user);
-        saveFile(product, file);
-        productRepo.save(product);
 
-        Iterable<Product> products = productRepo.findAll();
 
-        model.put("products", products);
-
-        return "main";
-    }
-
-    private void saveFile(Product product, @RequestParam("file") MultipartFile file) throws IOException {
-        if (file != null && !file.getOriginalFilename().isEmpty()) {
-            File uploadDir = new File(uploadPath);
-
-            if (!uploadDir.exists()) {
-                uploadDir.mkdir();
-            }
-
-            String uuidFile = UUID.randomUUID().toString();
-            String resultFilename = uuidFile + "." + file.getOriginalFilename();
-
-            file.transferTo(new File(uploadPath + "/" + resultFilename));
-
-            product.setFileName(resultFilename);
-        }
-    }
 
 }

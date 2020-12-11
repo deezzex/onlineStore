@@ -1,10 +1,14 @@
 package org.example.repos;
 
 import org.example.entities.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
+
 
 public interface ProductRepo extends CrudRepository<Product,Long> {
-    List<Product> findByName(String name);
+    Page<Product> findByName(String name, Pageable pageable);
+
+    Page<Product> findAll(Pageable pageable);
 }

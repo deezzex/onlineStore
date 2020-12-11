@@ -16,18 +16,27 @@
 
                  <div class="btn-group mb-3" role="group" aria-label="Basic outlined example">
 
-                     <a type="button"  href="/main" class="btn btn-outline-light">Каталог товарів</a>
-                     <#if isAdmin>
-                         <a type="button" href="/user" class="btn btn-outline-light">Список користувачів</a>
-                     </#if>
                      <#if user??>
+                         <a type="button"  href="/main" class="btn btn-outline-light">Каталог товарів</a>
                          <a type="button" href="/user/profile" class="btn btn-outline-light">Мій профіль</a>
+                         <a type="button" href="/user/basket" class="btn btn-outline-light">Корзина</a>
                      </#if>
+
                  </div>
+                     <#if isAdmin>
+                         <div class="btn-group mb-3 ml-5" role="group" aria-label="Basic outlined example">
+                             <a type="button" href="/user" class="btn btn-outline-light">Список користувачів</a>
+                             <a type="button" href="/product" class="btn btn-outline-light">Список товарів</a>
+                             <a type="button" href="/product/add" class="btn btn-outline-light">Додати</a>
+                         </div>
+                     </#if>
         </ul>
 
         <span class="badge  bg-warning text-dark navbar-text mr-3"> ${name} </span>
 
         <#if user??><@l.logout /></#if>
+        <#if !user??>
+            <a type="button" href="/login" class="btn btn-success border">Увійти</a>
+        </#if>
     </div>
 </nav>

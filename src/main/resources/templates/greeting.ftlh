@@ -1,5 +1,73 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
-    <div>Вітаємо, ви попали на онлайн магазин "Все для газди"</div>
+    <h2 class="text-center mb-3 ">Вітаємо вас у нашому магазині!</h2>
+
+
+    <div class="container form-row">
+        <a class="btn btn-info mt-3 form-group col" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Про нас</a>
+        <div class="collapse" id="collapseExample1">
+            <div class="form-group mt-3">
+                <div class="card card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                </div>
+            </div>
+        </div>
+        <a class="btn btn-warning mt-3 form-group col ml-2" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Послуги</a>
+        <div class="collapse" id="collapseExample2">
+            <div class="form-group mt-3">
+                <div class="card card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                </div>
+            </div>
+        </div>
+        <a class="btn btn-success mt-3 form-group col ml-2" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Команда</a>
+        <div class="collapse" id="collapseExample3">
+            <div class="form-group mt-3">
+                <div class="card card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card text-dark bg-light mb-3 mt-3">
+        <h4 class="card-header d-flex justify-content-center">Оффлайн магазин</h4>
+        <div class="card-body">
+            <p class="card-text">Нас можна знайти за адресою: Тернопільська обл., м.Теребовля, вул. Паращука 33 (на ринку)</p>
+        </div>
+    </div>
+
+
+    <div class="d-flex justify-content-center">
+    <div class="spinner-grow text-primary m-5" role="status">
+        <span class="visually-hidden"></span>
+    </div>
+    <div class="spinner-grow text-secondary m-5" role="status">
+        <span class="visually-hidden"></span>
+    </div>
+    <div class="spinner-grow text-success m-5" role="status">
+        <span class="visually-hidden"></span>
+    </div>
+    <div class="spinner-grow text-danger m-5" role="status">
+        <span class="visually-hidden"></span>
+    </div>
+    <div class="spinner-grow text-warning m-5" role="status">
+        <span class="visually-hidden"></span>
+    </div>
+    <div class="spinner-grow text-info m-5" role="status">
+        <span class="visually-hidden"></span>
+    </div>
+    <div class="spinner-grow text-dark m-5" role="status">
+        <span class="visually-hidden"></span>
+    </div>
+    </div>
+
+
+
+
+
 </@c.page>
