@@ -55,8 +55,6 @@ public class MailConfig {
         properties.setProperty("mail.smtp.auth", auth);
         properties.setProperty("mail.smtp.starttls.enable", enable);
 
-
-
         return mailSender;
     }
 }

@@ -7,7 +7,6 @@ package org.example.controllers;
 
 import org.example.entities.Role;
 import org.example.entities.User;
-import org.example.repos.UserRepo;
 import org.example.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,12 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.GeneratedValue;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/user")
@@ -59,7 +53,7 @@ public class UserController {
         model.addAttribute("email", user.getEmail());
         model.addAttribute("user",user);
 
-        return "profile";
+        return "userProfile";
     }
 
     @PostMapping("profile")

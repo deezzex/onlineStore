@@ -18,7 +18,7 @@
 
             <a type="button" href="#" class="btn btn-success">Добавити в корзину</a>
             <#if isAdmin>
-            <a type="button" href="#" class="btn btn-secondary">Редагувати товар</a>
+            <a type="button" href="/product/edit/${product.id}" class="btn btn-secondary">Редагувати товар</a>
             </#if>
         </label>
 

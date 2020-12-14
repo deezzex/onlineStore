@@ -123,11 +123,7 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public String getActivationCode() {
-        return activationCode;
-    }
+    public String getActivationCode() { return activationCode; }
 
-    public void setActivationCode(String activationCode) {
-        this.activationCode = activationCode;
-    }
+    public void setActivationCode(String activationCode) { this.activationCode = activationCode; }
 }

@@ -38,6 +38,18 @@
         <h4 class="card-header d-flex justify-content-center">Оффлайн магазин</h4>
         <div class="card-body">
             <p class="card-text">Нас можна знайти за адресою: Тернопільська обл., м.Теребовля, вул. Паращука 33 (на ринку)</p>
+
+            <div class="card-footer ">
+                <ul class="list-group list-group-flush ">
+                    <li class="list-group-item d-flex justify-content-center">
+                        <h4>Графік роботи:</h4>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-center text-muted">Понеділок - Пятниця: 08:00 - 17:00</li>
+                    <li class="list-group-item d-flex justify-content-center text-muted">Субота: 08:00 - 16:00</li>
+                    <li class="list-group-item d-flex justify-content-center text-muted">Неділя: 09:00 - 14:00</li>
+                </ul>
+            </div>
+
         </div>
     </div>
 

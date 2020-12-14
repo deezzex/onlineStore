@@ -3,8 +3,8 @@
 
 <@c.page>
 
-
-    <div class="form-group mt-3">
+    <h3>Додавання нового товару</h3>
+    <div class="form-group mt-4">
         <form method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <input type="text" class="form-control" name="name" placeholder="Назва" />

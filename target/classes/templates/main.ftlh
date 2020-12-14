@@ -19,11 +19,10 @@
 
     <div class="card-columns">
         <#list page1.content as product>
-            <div class="card my-3 text-center border border-secondary border-5 rounded" style="width: 18rem;">
+            <div class="card my-3 text-center border border-secondary border-5 rounded" style="width: 300px; height: 480px; background-color: #f0cccf">
 
-                    <img src="/img/${product.fileName!}" class="card-img-top">
-                <hr class="border border-5">
-                <h4 class="card-title">${product.name!}</h4>
+                    <img src="/img/${product.fileName!}" class="card-img-top" style="height: 300px">
+                <h4 class="card-title mt-3">${product.name!}</h4>
                 <h6 class="card-subtitle text-muted mb-2">${product.producer!}</h6>
                 <p class="card-text">Ціна: ${product.price!} грн.</p>
                 <a href="/product/${product.id}" class="btn btn-info mb-2">Детальніше</a>

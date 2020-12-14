@@ -40,7 +40,7 @@
             <li class="page-item disabled">
                 <a class="page-link" href="#" tabindex="-1">Кількість товарів на сторінці:</a>
             </li>
-            <#list [3, 5, 10, 25, 50] as c>
+            <#list [3, 6, 9, 18, 27] as c>
                 <#if c == page1.getSize()>
                     <li class="page-item active">
                         <a class="page-link" href="#" tabindex="-1">${c}</a>

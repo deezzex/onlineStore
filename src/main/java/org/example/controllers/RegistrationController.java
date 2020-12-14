@@ -5,9 +5,7 @@
 
 package org.example.controllers;
 
-import org.example.entities.Role;
 import org.example.entities.User;
-import org.example.repos.UserRepo;
 import org.example.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Collections;
 import java.util.Map;
 
 @Controller
@@ -27,6 +24,10 @@ public class RegistrationController {
     @GetMapping("/registration")
     public String registration() {
         return "registration";
+    }
+    @GetMapping("/login")
+    public String login() {
+        return "login";
     }
 
     @PostMapping("/registration")
