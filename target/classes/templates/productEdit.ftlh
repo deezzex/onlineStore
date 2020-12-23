@@ -3,6 +3,12 @@
 <@c.page>
     <h3>Редагування товару</h3>
 
+    <form action="/product/stock" method="post">
+        <input class="mt-1" type="hidden" name="product" value="${product.id}">
+        <input class="mt-1" type="hidden" name="_csrf" value="${_csrf.token}" />
+        <button class="btn btn-info mt-2 d-flex justify-content-center" type="submit">В наявності / Не в наявності</button>
+    </form>
+
     <form action="/product" method="post">
         <div class="form-group row mt-3">
             <label class=" col-form-label">Назва:</label>
@@ -23,8 +29,9 @@
             <input class="form-control mb-1" type="text" name="evaluationForm" value="${product.evaluationForm!}">
 
         </div>
+        <hr/>
         <#list categories as category>
-            <div >
+            <div>
                 <label><input type="checkbox" name="${category}" ${product.categories?seq_contains(category)?string("checked", "")}>  ${category}</label>
             </div>
         </#list>
@@ -33,4 +40,13 @@
         <input type="hidden" value="${_csrf.token}" name="_csrf">
         <button class="btn btn-primary" type="submit">Зберегти</button>
     </form>
+
+    <div class="d-flex justify-content-end">
+        <form action="/product/${product.id}/delete" method="post">
+            <input class="mt-1" type="hidden" name="product" value="${product.id}">
+            <input class="mt-1" type="hidden" name="_csrf" value="${_csrf.token}" />
+            <button class="btn btn-danger mt-2 d-flex justify-content-center" type="submit">Видалити</button>
+        </form>
+    </div>
+
 </@c.page>

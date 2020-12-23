@@ -94,6 +94,10 @@ public class ProductService {
         orderRepo.deleteById(order.getId());
     }
 
+    public void deleteProduct(Product product) {
+        productRepo.deleteById(product.getId());
+    }
+
     public void addCategories(Map<String, String> form, Product product, ProductRepo productRepo) {
         Set<String> categories = Arrays.stream(Category.values()).map(Category::name).collect(Collectors.toSet());
 
@@ -106,6 +110,20 @@ public class ProductService {
 
         productRepo.save(product);
     }
+
+    public void checkedForStock(Product product) {
+        if (product.getInStock().contains(Stock.FALSE)){
+            product.getInStock().clear();
+            product.getInStock().add(Stock.TRUE);
+        }else if(product.getInStock().contains(Stock.TRUE)) {
+            product.getInStock().clear();
+            product.getInStock().add(Stock.FALSE);
+        }else {
+            product.getInStock().add(Stock.TRUE);
+        }
+        productRepo.save(product);
+    }
+
 
     public void categoryForProducts(Model model, String category, @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable, ProductRepo productRepo) {
         Page<Product> page;

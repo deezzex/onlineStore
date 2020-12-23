@@ -3,7 +3,18 @@
 <@c.page>
     <h3>Список користувачів</h3>
 
-    <table class="table table-primary table-striped table-hover table-bordered mt-5">
+    <div class="form-row">
+        <div class="form-group col">
+            <form method="get" action="/user" class="form-inline">
+                <div class="col-sm-11 col-form-label form-group row">
+                    <input type="text" name="filter" class="form-control col" value="${filter!}" placeholder="Пошук за прізвищем">
+                </div>
+                <button type="submit" class="btn btn btn-success ml-2">Шукати</button>
+            </form>
+        </div>
+    </div>
+
+    <table class="table table-primary table-striped table-hover table-bordered mt-3">
         <thead class="table-dark">
         <tr>
             <th scope="col">Id</th>
@@ -26,6 +37,8 @@
                 <td><#list user.roles as role>${role}<#sep>, </#list></td>
                 <td><a href="/user/${user.id}" type="button" class="btn btn-secondary">Редагувати</a></td>
             </tr>
+        <#else>
+            <h4>Такого користувача немає</h4>
         </#list>
         </tbody>
     </table>

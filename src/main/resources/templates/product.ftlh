@@ -6,7 +6,7 @@
     <div class="form-group row">
         <label class="col">
             <div class="alert alert-success " role="alert">
-                <h3>${product.name!}</h3> <a href="#" class="alert-link"></a>
+                <h3>${product.name!}</h3>
                 <hr>
                 <p class="mb-0">${product.subtitle!}</p>
             </div>
@@ -15,13 +15,29 @@
                 <hr>
                 <p class="mb-0">${product.evaluationForm!}</p>
             </div>
-
+            <#if stock>
+                <div class="alert alert-warning " role="alert">
+                    <h6>Товар в наявності</h6>
+                </div>
+            </#if>
+            <#if !stock>
+                <div class="alert alert-danger" role="alert">
+                    <h6>Товару немає наявності</h6>
+                </div>
+            </#if>
+            <#if stock>
             <form action="/basket/${user.id}" method="post">
-                <input type="text" name="count" class="form-control" placeholder="Кількість товарів" />
+                <div class="form-group row">
+                    <div class="input-group input-group-lg col-sm-8">
+                        <span class="input-group-text" id="inputGroup-sizing-lg">Обовязково!</span>
+                        <input type="text" class="col form-control ${(textError??)?string('is-invalid','')}"  placeholder="Кількість товарів" name="count" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                    </div>
                 <input class="mt-1" type="hidden" name="product" value="${product.id}">
                 <input class="mt-1" type="hidden" name="_csrf" value="${_csrf.token}" />
-                <button class="btn btn-primary mt-2" type="submit">Добавити в корзину</button>
+                <button class="btn btn-primary mr-2 ml-4 col-sm-3" type="submit">В корзину</button>
+                </div>
             </form>
+            </#if>
 
             <#if isAdmin>
             <a type="button"  href="/product/edit/${product.id}" class="btn btn-secondary mt-2">Редагувати товар</a>

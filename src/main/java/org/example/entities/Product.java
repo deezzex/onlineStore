@@ -23,6 +23,11 @@ public class Product {
     private String weight;
     private String evaluationForm;
 
+    @ElementCollection(targetClass = Stock.class,fetch = FetchType.EAGER)
+    @CollectionTable(name = "product_inStock",joinColumns = @JoinColumn(name = "product_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Stock> inStock;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
     private User author;
@@ -145,5 +150,13 @@ public class Product {
 
     public String getAuthorName(){
         return author != null ? author.getUsername() : "<none>";
+    }
+
+    public Set<Stock> getInStock() {
+        return inStock;
+    }
+
+    public void setInStock(Set<Stock> inStock) {
+        this.inStock = inStock;
     }
 }

@@ -49,11 +49,40 @@
                     <li class="list-group-item d-flex justify-content-center text-muted">Неділя: 09:00 - 14:00</li>
                 </ul>
             </div>
-
         </div>
-
     </div>
 
+    <div class="container">
+        <a class="btn btn-info mt-3 form-group col" data-toggle="collapse" href="#collapseResponse" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Відгуки наших клієнтів <3 </a>
+        <div class="collapse col" id="collapseResponse">
+            <div class="form-group mt-3">
+                <div class="card row">
+                    <h5 class="card-header">Іван Іваненко</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">Чудовий персонал!</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content. Cards assume no specific width to start, so they’ll be 100% wide unless otherwise stated. You can change this as needed with custom CSS, grid classes, grid Sass mixins, or utilities.</p>
+                    </div>
+                </div>
+
+                <div class="card row mt-2">
+                    <h5 class="card-header">Сергій Козаков</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">Зручний сайт!</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                </div>
+
+                <div class="card row mt-2">
+                    <h5 class="card-header">Петро Петренко</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">Швидка доставка!</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content. With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="d-flex justify-content-center">
     <div class="spinner-grow text-primary m-5" role="status">

@@ -6,6 +6,7 @@
 package org.example.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Entity
@@ -24,9 +25,8 @@ public class Order {
     private Product product;
 
     private boolean completed;
-
+    @NotBlank(message = "Введіть кількість товару!")
     private String count;
-
 
 
     public Order(User author, Product product,boolean completed,String count) {

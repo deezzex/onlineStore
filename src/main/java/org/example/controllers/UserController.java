@@ -7,6 +7,7 @@ package org.example.controllers;
 
 import org.example.entities.Role;
 import org.example.entities.User;
+import org.example.repos.UserRepo;
 import org.example.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,10 +24,21 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRepo userRepo;
+
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public String userList(Model model){
-        model.addAttribute("users",userService.findAll());
+    public String userList(Model model,
+                           @RequestParam(required = false, defaultValue = "") String filter){
+        Iterable<User> users;
+
+        if (filter != null && !filter.isEmpty()) {
+            users = userRepo.findByLastName(filter);
+        } else {
+            users = userRepo.findAll();
+        }
+        model.addAttribute("users",users);
         return "userList";
     }
 

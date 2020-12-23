@@ -20,7 +20,6 @@
         </div>
     </div>
 
-
         <div class="collapse" id="collapseCategory">
             <table class="table mt-2">
                 <tbody>
@@ -101,7 +100,7 @@
             <div class="card my-3 text-center border border-secondary border-5 rounded" style="width: 300px; height: 480px; background-color: #bdc3db;">
 
                     <img src="/img/${product.fileName!}" class="card-img-top" style="height: 300px">
-                <h4 class="card-title mt-3">${product.name!}</h4>
+                <h4 class="card-title mt-3">${product.subtitle!}</h4>
                 <h6 class="card-subtitle text-muted mb-2">${product.producer!}</h6>
                 <p class="card-text">Ціна: ${product.price!} грн.</p>
                 <a href="/product/${product.id}" class="btn btn-info mb-2">Детальніше</a>
