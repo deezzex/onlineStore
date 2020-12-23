@@ -36,7 +36,6 @@ public class RegistrationController {
             model.put("message", "User exists!");
             return "registration";
         }
-
         return "redirect:/login";
     }
 

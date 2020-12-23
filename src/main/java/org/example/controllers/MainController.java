@@ -14,6 +14,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
@@ -27,7 +28,7 @@ public class MainController {
     private ProductService productService;
 
     @GetMapping("/")
-    public String greeting(Map<String, Object> model) {
+    public String greeting() {
         return "greeting";
     }
 
@@ -39,6 +40,15 @@ public class MainController {
 
         model.addAttribute("url","/main");
 
+        return "main";
+    }
+    @GetMapping("/main/category")
+    public String categoryMain(@RequestParam(required = false, defaultValue = "") String category,
+                               @PageableDefault(sort = {"id"},direction = Sort.Direction.DESC) Pageable pageable,
+                               Model model){
+
+        productService.categoryForProducts(model,category,pageable,productRepo);
+        model.addAttribute("url","/main");
         return "main";
     }
 }

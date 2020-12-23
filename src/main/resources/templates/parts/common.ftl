@@ -10,11 +10,10 @@
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         </head>
 
-        <body style="background-color: #a9b1cc;">
+        <body style="background: #f2f2d8">
         <#include "navbar.ftl">
-            <div class="container-sm mt-7 p-5 bg-light">
+            <div class="container-xl mt-7 p-5 bg-light border">
                 <#nested>
-
             </div>
         <p class="card-text mt-3 d-flex justify-content-center"><small class="text-muted">Все для газди! У Василя</small></p>
 

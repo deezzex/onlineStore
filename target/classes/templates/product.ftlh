@@ -16,9 +16,15 @@
                 <p class="mb-0">${product.evaluationForm!}</p>
             </div>
 
-            <a type="button" href="#" class="btn btn-success">Добавити в корзину</a>
+            <form action="/basket/${user.id}" method="post">
+                <input type="text" name="count" class="form-control" placeholder="Кількість товарів" />
+                <input class="mt-1" type="hidden" name="product" value="${product.id}">
+                <input class="mt-1" type="hidden" name="_csrf" value="${_csrf.token}" />
+                <button class="btn btn-primary mt-2" type="submit">Добавити в корзину</button>
+            </form>
+
             <#if isAdmin>
-            <a type="button" href="/product/edit/${product.id}" class="btn btn-secondary">Редагувати товар</a>
+            <a type="button"  href="/product/edit/${product.id}" class="btn btn-secondary mt-2">Редагувати товар</a>
             </#if>
         </label>
 

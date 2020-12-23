@@ -23,6 +23,11 @@
             <input class="form-control mb-1" type="text" name="evaluationForm" value="${product.evaluationForm!}">
 
         </div>
+        <#list categories as category>
+            <div >
+                <label><input type="checkbox" name="${category}" ${product.categories?seq_contains(category)?string("checked", "")}>  ${category}</label>
+            </div>
+        </#list>
 
         <input type="hidden" value="${product.id}" name="productId">
         <input type="hidden" value="${_csrf.token}" name="_csrf">

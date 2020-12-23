@@ -6,6 +6,7 @@
 package org.example.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Product {
@@ -25,6 +26,11 @@ public class Product {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
     private User author;
+
+    @ElementCollection(targetClass = Category.class,fetch = FetchType.EAGER)
+    @CollectionTable(name = "product_category",joinColumns = @JoinColumn(name = "product_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Category> categories;
 
     public Product() {
     }
@@ -127,6 +133,14 @@ public class Product {
 
     public void setEvaluationForm(String evaluationForm) {
         this.evaluationForm = evaluationForm;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 
     public String getAuthorName(){

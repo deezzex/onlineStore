@@ -13,21 +13,25 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+
+
                  <div class="btn-group" role="group" aria-label="Basic outlined example">
 
                      <#if user??>
-                         <a type="button"  href="/main" class="btn btn-outline-light">Каталог товарів</a>
-                         <a type="button" href="/user/profile" class="btn btn-outline-light">Мій профіль</a>
-                         <a type="button" href="/user/basket" class="btn btn-outline-light">Корзина</a>
+                         <a type="button"  href="/main" class="btn btn-outline-light">Товари</a>
+                         <a type="button" href="/user/profile" class="btn btn-outline-light">Профіль</a>
+                         <a type="button" href="/basket/${user.id}" class="btn btn-outline-light">Корзина</a>
                      </#if>
 
                  </div>
                      <#if isAdmin>
                          <div class="btn-group  ml-5" role="group" aria-label="Basic outlined example">
-                             <a type="button" href="/user" class="btn btn-outline-light">Список користувачів</a>
-                             <a type="button" href="/product" class="btn btn-outline-light">Список товарів</a>
+                             <a type="button" href="/user" class="btn btn-outline-light">Користувачі</a>
+                             <a type="button" href="/product" class="btn btn-outline-light">Товари</a>
+                             <a type="button" href="#" class="btn btn-outline-light">Замовлення</a>
                              <a type="button" href="/product/add" class="btn btn-outline-light">Додати</a>
                          </div>
+
                      </#if>
             <#if !user??>
                 <a class="navbar-brand text-center d-flex justify-content-center " style="color: #e7eba4;" href="/">Для того щоб побачити каталог товарів потрібно увійти в обліковий запис! </a>
