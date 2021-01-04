@@ -86,4 +86,9 @@ public class Order {
     public void setCount(String count) {
         this.count = count;
     }
+
+    @Override
+    public String toString() {
+        return product + " "+ count;
+    }
 }

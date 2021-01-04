@@ -5,12 +5,13 @@
 
 package org.example.services;
 
-import org.aspectj.weaver.ast.Or;
-import org.example.controllers.ProductController;
 import org.example.entities.*;
+import org.example.entities.enums.Category;
+import org.example.entities.enums.Status;
+import org.example.entities.enums.Stock;
+import org.example.repos.COrderRepo;
 import org.example.repos.OrderRepo;
 import org.example.repos.ProductRepo;
-import org.example.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -37,7 +38,7 @@ public class ProductService {
     @Autowired
     private OrderRepo orderRepo;
     @Autowired
-    private UserRepo userRepo;
+    private COrderRepo cOrderRepo;
 
 
     @Value("${upload.path}")
@@ -138,5 +139,18 @@ public class ProductService {
 
         model.addAttribute("page1",page);
         model.addAttribute("filter", category);
+    }
+
+    public void addStatus(Map<String, String> form, ConfirmedOrder order, COrderRepo cOrderRepo) {
+        Set<String> statuses = Arrays.stream(Status.values()).map(Status::name).collect(Collectors.toSet());
+
+        order.getStatuses().clear();
+        for(String key: form.keySet()){
+            if (statuses.contains(key)){
+                order.getStatuses().add(Status.valueOf(key));
+            }
+        }
+
+        cOrderRepo.save(order);
     }
 }

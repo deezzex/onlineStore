@@ -5,6 +5,9 @@
 
 package org.example.entities;
 
+import org.example.entities.enums.Category;
+import org.example.entities.enums.Stock;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -158,5 +161,10 @@ public class Product {
 
     public void setInStock(Set<Stock> inStock) {
         this.inStock = inStock;
+    }
+
+    @Override
+    public String toString() {
+        return subtitle + " " + producer;
     }
 }

@@ -20,7 +20,7 @@
                      <#if user??>
                          <a type="button"  href="/main" class="btn btn-outline-light">Товари</a>
                          <a type="button" href="/user/profile" class="btn btn-outline-light">Профіль</a>
-                         <a type="button" href="/basket/${user.id}" class="btn btn-outline-light">Корзина</a>
+                         <a type="button" href="/basket/${currentUserId}" class="btn btn-outline-light">Корзина</a>
                      </#if>
 
                  </div>
@@ -28,7 +28,7 @@
                          <div class="btn-group  ml-5" role="group" aria-label="Basic outlined example">
                              <a type="button" href="/user" class="btn btn-outline-light">Користувачі</a>
                              <a type="button" href="/product" class="btn btn-outline-light">Товари</a>
-                             <a type="button" href="#" class="btn btn-outline-light">Замовлення</a>
+                             <a type="button" href="/basket/all" class="btn btn-outline-light">Замовлення</a>
                              <a type="button" href="/product/add" class="btn btn-outline-light">Додати</a>
                          </div>
 

@@ -5,12 +5,13 @@
 
 package org.example.entities;
 
-import org.aspectj.weaver.ast.Or;
+import org.example.entities.enums.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.awt.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
@@ -21,11 +22,21 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank(message = "Username cannot be empty")
     private String username;
+
+    @NotBlank(message = "Password cannot be empty")
     private String password;
+    @Transient
+    private String password2;
+
+    @NotBlank(message = "Email cannot be empty")
+    @Email(message = "Email is not correct")
     private String email;
     private String activationCode;
+    @NotBlank(message = "FirstName cannot be empty")
     private String firstName;
+    @NotBlank(message = "LastName cannot be empty")
     private String lastName;
     private boolean active;
 
@@ -154,5 +165,13 @@ public class User implements UserDetails {
 
     public void setOrder(Set<Order> order) {
         this.order = order;
+    }
+
+    public String getPassword2() {
+        return password2;
+    }
+
+    public void setPassword2(String password2) {
+        this.password2 = password2;
     }
 }

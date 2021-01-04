@@ -53,7 +53,7 @@
     </div>
 
     <div class="container">
-        <a class="btn btn-info mt-3 form-group col" data-toggle="collapse" href="#collapseResponse" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <a class="btn btn-primary mt-3 form-group col" data-toggle="collapse" href="#collapseResponse" role="button" aria-expanded="false" aria-controls="collapseExample">
             Відгуки наших клієнтів <3 </a>
         <div class="collapse col" id="collapseResponse">
             <div class="form-group mt-3">

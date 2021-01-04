@@ -5,7 +5,7 @@
 
 package org.example.controllers;
 
-import org.example.entities.Role;
+import org.example.entities.enums.Role;
 import org.example.entities.User;
 import org.example.repos.UserRepo;
 import org.example.services.UserService;

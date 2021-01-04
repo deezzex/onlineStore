@@ -3,7 +3,7 @@
  */
 
 
-package org.example.entities;
+package org.example.entities.enums;
 
 public enum Category {
     PAINT,TOOL,PLUMBING,BUILD_MATERIAL,ELECTRIC,FASTENING,FURNITURE,METAL,LINOLEUM,

@@ -6,6 +6,8 @@
 package org.example.controllers;
 
 import org.example.entities.*;
+import org.example.entities.enums.Category;
+import org.example.entities.enums.Stock;
 import org.example.repos.ProductRepo;
 import org.example.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

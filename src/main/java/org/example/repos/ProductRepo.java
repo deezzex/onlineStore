@@ -1,6 +1,6 @@
 package org.example.repos;
 
-import org.example.entities.Category;
+import org.example.entities.enums.Category;
 import org.example.entities.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -94,7 +94,7 @@
             </table>
         </div>
 
-
+    <@p.pager url page1/>
     <div class="card-columns">
         <#list page1.content as product>
             <div class="card my-3 text-center border border-secondary border-5 rounded" style="width: 300px; height: 480px; background-color: #bdc3db;">
