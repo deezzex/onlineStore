@@ -8,6 +8,7 @@ package org.example.entities;
 import org.example.entities.enums.Status;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Entity
@@ -15,10 +16,15 @@ public class ConfirmedOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @NotBlank(message = "Вкажіть місто доставки!")
     private String cityDestination;
+    @NotBlank(message = "Вкажіть вулицю доставки!")
     private String streetDestination;
+    @NotBlank(message = "Вкажіть номер телефону одержувача")
     private String phone;
+    @NotBlank(message = "Вкажіть імя одержувача")
     private String firstNameOfCustomer;
+    @NotBlank(message = "Вкажіть прізвище одержувача")
     private String lastNameOfCustomer;
     private Long total;
 

@@ -6,7 +6,7 @@
     <div class="alert alert-primary" role="alert">
         Ввійдіть в обліковий запис! <a href="#" class="alert-link"></a>
     </div>
-   
+
     <@l.login "/login" false/>
 
     <#if Session?? && Session.SPRING_SECURITY_LAST_EXCEPTION??>

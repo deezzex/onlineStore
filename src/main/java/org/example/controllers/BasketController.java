@@ -83,11 +83,13 @@ public class BasketController {
 
     @PostMapping("/new-order")
     public String newOrder(@AuthenticationPrincipal User user,
-                            @RequestParam String city,
+                           @RequestParam String city,
                            @RequestParam String street,
                            @RequestParam String phone,
                            @RequestParam String firstName,
-                           @RequestParam String lastName){
+                           @RequestParam String lastName
+                           ){
+
         Set<Order> orders = orderRepo.findByAuthor(user);
         long total = 0L;
         for (Order order: orders){
@@ -103,7 +105,6 @@ public class BasketController {
     @GetMapping("/all")
     public String allOrders(Model model){
         Iterable<ConfirmedOrder> confirmedOrders = cOrderRepo.findAll();
-
         model.addAttribute("confirmedOrders",confirmedOrders);
         return "allOrders";
     }
@@ -113,6 +114,7 @@ public class BasketController {
         cOrderRepo.deleteById(order.getId());
         return "redirect:/basket/all";
     }
+
     @GetMapping("/all/{order}/change-status")
     public String changeStatus(@PathVariable ConfirmedOrder order,Model model){
         model.addAttribute("order",order);
@@ -120,6 +122,7 @@ public class BasketController {
 
         return "orderChangeStatus";
     }
+
     @PostMapping("/all/{order}/change-status")
     public String changeStatusSave(@PathVariable ConfirmedOrder order ,
                                    @RequestParam Map<String,String> form){
