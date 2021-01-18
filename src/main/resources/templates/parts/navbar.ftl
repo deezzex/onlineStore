@@ -39,7 +39,7 @@
         </ul>
         <#if user??>
 
-        <a class="mr-3 align-self-center" href="#">
+        <a class="mr-3 align-self-center" href="/liked">
             <i class="far fa-heart fa-2x"></i>
         </a>
 

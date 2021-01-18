@@ -39,6 +39,7 @@ public class UserController {
             users = userRepo.findAll();
         }
         model.addAttribute("users",users);
+
         return "userList";
     }
 
@@ -47,12 +48,17 @@ public class UserController {
     public String userEdit(@PathVariable User user,Model model){
         model.addAttribute("user",user);
         model.addAttribute("roles", Role.values());
+
         return "userEdit";
     }
 
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public String userSave(@RequestParam("userId") User user,@RequestParam String username,@RequestParam String firstName,@RequestParam String lastName,@RequestParam Map<String,String> form){
+    public String userSave(@RequestParam("userId") User user,
+                           @RequestParam String username,
+                           @RequestParam String firstName,
+                           @RequestParam String lastName,
+                           @RequestParam Map<String,String> form){
         userService.saveUser(user,username,firstName,lastName,form);
 
         return "redirect:/user";

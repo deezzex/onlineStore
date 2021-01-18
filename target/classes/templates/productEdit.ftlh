@@ -1,13 +1,19 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
-    <h3>Редагування товару</h3>
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Редагування товару!</h4>
+        <p>${stock}</p>
+        <hr>
+        <p class="mb-0">
+        <form action="/product/stock" method="post">
+            <input class="mt-1" type="hidden" name="product" value="${product.id}">
+            <input class="mt-1" type="hidden" name="_csrf" value="${_csrf.token}" />
+            <button class="btn btn-info mt-2 d-flex justify-content-center" type="submit">Змінити статус</button>
+        </form>
+        </p>
+    </div>
 
-    <form action="/product/stock" method="post">
-        <input class="mt-1" type="hidden" name="product" value="${product.id}">
-        <input class="mt-1" type="hidden" name="_csrf" value="${_csrf.token}" />
-        <button class="btn btn-info mt-2 d-flex justify-content-center" type="submit">В наявності / Не в наявності</button>
-    </form>
 
     <form action="/product" method="post">
         <div class="form-group row mt-3">

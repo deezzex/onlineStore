@@ -17,11 +17,11 @@
         Показати пароль</a>
     <div class="collapse" id="collapseExample">
         <div class="form-group">
-                <div class="form-group">
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item">${user.password}</li>
-                    </ul>
-                </div>
+            <div class="form-group">
+                <ul class="list-group mb-3">
+                    <li class="list-group-item">${user.password}</li>
+                </ul>
+            </div>
         </div>
     </div>
 

@@ -2,6 +2,7 @@
 <#include "parts/security.ftl">
 
 <@c.page>
+    <h3>Список сформованих замовлень</h3>
 
     <table class="table table-light table-striped table-bordered mt-2">
         <thead class="table-light">

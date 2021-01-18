@@ -37,25 +37,31 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("{product}")
-    public String viewProduct(@AuthenticationPrincipal User user,@PathVariable Product product, Model model){
+    public String viewProduct(@AuthenticationPrincipal User user,
+                              @PathVariable Product product,
+                              Model model){
+
         Set<Stock> stocks = product.getInStock();
         if (stocks.contains(Stock.TRUE)){
             model.addAttribute("stock",true);
         }else {
             model.addAttribute("stock",false);
         }
-
         model.addAttribute("product",product);
         model.addAttribute("user",user);
+
         return "product";
     }
 
     @GetMapping
     public String productList(Model model,
                               @PageableDefault(sort = {"id"},direction = Sort.Direction.DESC) Pageable pageable,
-                              @RequestParam(required = false, defaultValue = "") String filter){
-        productService.filterForProducts(model, filter,pageable,productRepo);
+                              @RequestParam(required = false, defaultValue = "") String filter,
+                              @AuthenticationPrincipal User user) {
+
+        productService.filterForProducts(model, filter,pageable,productRepo,user);
         model.addAttribute("url","/product");
+
         return "productList";
     }
 
@@ -79,11 +85,11 @@ public class ProductController {
             @RequestParam("file") MultipartFile file,
             Map<String, Object> model
     ) throws IOException {
+
         Product product = new Product(name,consist,description,producer,price,subtitle,weight,evaluationForm,user);
         productService.saveFile(product, file);
         productRepo.save(product);
         Iterable<Product> products = productRepo.findAll();
-
         model.put("products", products);
 
         return "redirect:/main";
@@ -93,16 +99,35 @@ public class ProductController {
     @GetMapping("/edit/{product}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String productEdit(Model model,@PathVariable Product product){
+
+        Set<Stock> stocks = product.getInStock();
+
+        if (stocks.contains(Stock.TRUE)){
+            model.addAttribute("stock","Товар в наявності");
+        }else {
+            model.addAttribute("stock","Товар не в наявності");
+        }
+
         model.addAttribute("product",product);
         model.addAttribute("categories", Category.values());
         model.addAttribute("stocks", Stock.values());
+
         return "productEdit";
     }
 
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public String productSave(@RequestParam("productId") Product product, @RequestParam String name, @RequestParam String consist, @RequestParam String description, @RequestParam String producer, @RequestParam String weight, @RequestParam String subtitle, @RequestParam Long price, @RequestParam String evaluationForm
-            , @RequestParam Map<String,String> form){
+    public String productSave(@RequestParam("productId") Product product,
+                              @RequestParam String name,
+                              @RequestParam String consist,
+                              @RequestParam String description,
+                              @RequestParam String producer,
+                              @RequestParam String weight,
+                              @RequestParam String subtitle,
+                              @RequestParam Long price,
+                              @RequestParam String evaluationForm,
+                              @RequestParam Map<String,String> form){
+
         productService.saveProduct(product,name,consist,description,producer,weight,subtitle,price,evaluationForm,form);
 
         return "redirect:/product";
@@ -112,6 +137,7 @@ public class ProductController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public String productStock(@RequestParam Product product){
         productService.checkedForStock(product);
+
         return "redirect:/product";
     }
 
@@ -119,6 +145,7 @@ public class ProductController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteProduct(@RequestParam @PathVariable Product product){
         productService.deleteProduct(product);
+
         return "redirect:/product";
     }
 

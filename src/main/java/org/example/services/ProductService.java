@@ -6,6 +6,7 @@
 package org.example.services;
 
 import org.example.entities.*;
+import org.example.entities.dto.ProductDto;
 import org.example.entities.enums.Category;
 import org.example.entities.enums.Status;
 import org.example.entities.enums.Stock;
@@ -18,34 +19,42 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
     @Autowired
     private ProductRepo productRepo;
+
     @Autowired
     private OrderRepo orderRepo;
-    @Autowired
-    private COrderRepo cOrderRepo;
-
 
     @Value("${upload.path}")
     private String uploadPath;
 
-    public void saveProduct(Product product, String name, String consist, String description, String producer, String weight, String subtitle, Long price, String evaluationForm
-            , Map<String, String> form) {
+    public void saveProduct(Product product,
+                            String name,
+                            String consist,
+                            String description,
+                            String producer,
+                            String weight,
+                            String subtitle,
+                            Long price,
+                            String evaluationForm,
+                            Map<String, String> form) {
+
         product.setName(name);
         product.setConsist(consist);
         product.setDescriptions(description);
@@ -75,17 +84,18 @@ public class ProductService {
         }
     }
 
-    public void filterForProducts(Model model, String filter,
+    public void filterForProducts(Model model,
+                                  String filter,
                                   @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
-                                  ProductRepo productRepo) {
-        Page<Product> page;
+                                  ProductRepo productRepo,
+                                  @AuthenticationPrincipal User user) {
+        Page<ProductDto> page;
 
         if (filter != null && !filter.isEmpty()) {
-            page = productRepo.findByName(filter,pageable);
+            page = productRepo.findByName(filter,pageable,user);
         } else {
-            page = productRepo.findAll(pageable);
+            page = productRepo.findAll(pageable,user);
         }
-
 
         model.addAttribute("page1",page);
         model.addAttribute("filter", filter);
@@ -100,6 +110,7 @@ public class ProductService {
     }
 
     public void addCategories(Map<String, String> form, Product product, ProductRepo productRepo) {
+
         Set<String> categories = Arrays.stream(Category.values()).map(Category::name).collect(Collectors.toSet());
 
         product.getCategories().clear();
@@ -125,19 +136,23 @@ public class ProductService {
         productRepo.save(product);
     }
 
+    public void categoryForProducts(Model model,
+                                    String category,
+                                    @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
+                                    ProductRepo productRepo,
+                                    @AuthenticationPrincipal User user) {
 
-    public void categoryForProducts(Model model, String category, @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable, ProductRepo productRepo) {
-        Page<Product> page;
-
+        Page<ProductDto> page;
         Category cat = Category.valueOf(category);
-
         if (category != null && !category.isEmpty()) {
-            page = productRepo.findByCategories(cat,pageable);
+            Page<Product> page1 = productRepo.findByCategories(cat,pageable);
+            model.addAttribute("filterIsEmpty",true);
+            model.addAttribute("page1",page1);
         } else {
-            page = productRepo.findAll(pageable);
+            page = productRepo.findAll(pageable,user);
+            model.addAttribute("page1",page);
         }
 
-        model.addAttribute("page1",page);
         model.addAttribute("filter", category);
     }
 
@@ -152,5 +167,33 @@ public class ProductService {
         }
 
         cOrderRepo.save(order);
+    }
+
+    public long getTotal(Iterable<Order> orders) {
+        long total = 0L;
+        for (Order order : orders) {
+            total += Long.parseLong(order.getCount()) * order.getProduct().getPrice();
+        }
+        return total;
+    }
+
+    public UriComponents getUriComponents(User user,
+                                          Product product,
+                                          RedirectAttributes redirectAttributes,
+                                          String referer) {
+        Set<User> likes = product.getLikes();
+
+        if (likes.contains(user)){
+            likes.remove(user);
+        }else {
+            likes.add(user);
+        }
+
+        productRepo.save(product);
+        UriComponents components = UriComponentsBuilder.fromHttpUrl(referer).build();
+        components.getQueryParams().entrySet().
+                forEach(pair -> redirectAttributes.addAttribute(pair.getKey(),pair.getValue()));
+
+        return components;
     }
 }

@@ -7,8 +7,10 @@ package org.example.entities;
 
 import org.example.entities.enums.Category;
 import org.example.entities.enums.Stock;
+import org.example.entities.util.ProductHelper;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -39,6 +41,12 @@ public class Product {
     @CollectionTable(name = "product_category",joinColumns = @JoinColumn(name = "product_id"))
     @Enumerated(EnumType.STRING)
     private Set<Category> categories;
+
+    @ManyToMany
+    @JoinTable(name = "message_likes",
+                joinColumns = {@JoinColumn(name = "product_id")},
+                inverseJoinColumns = {@JoinColumn(name = "user_id")})
+    private Set<User> likes = new HashSet<>();
 
     public Product() {
     }
@@ -152,7 +160,7 @@ public class Product {
     }
 
     public String getAuthorName(){
-        return author != null ? author.getUsername() : "<none>";
+        return ProductHelper.getAuthorName(author);
     }
 
     public Set<Stock> getInStock() {
@@ -161,6 +169,14 @@ public class Product {
 
     public void setInStock(Set<Stock> inStock) {
         this.inStock = inStock;
+    }
+
+    public Set<User> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Set<User> likes) {
+        this.likes = likes;
     }
 
     @Override

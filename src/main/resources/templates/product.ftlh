@@ -26,21 +26,21 @@
                 </div>
             </#if>
             <#if stock>
-            <form action="/basket/${user.id}" method="post">
-                <div class="form-group row">
-                    <div class="input-group input-group-lg col-sm-8">
-                        <span class="input-group-text" id="inputGroup-sizing-lg">Обовязково!</span>
-                        <input type="text" class="col form-control ${(textError??)?string('is-invalid','')}"  placeholder="Кількість товарів" name="count" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                <form action="/basket/${user.id}" method="post">
+                    <div class="form-group row">
+                        <div class="input-group input-group-lg col-sm-8">
+                            <span class="input-group-text" id="inputGroup-sizing-lg">Обовязково!</span>
+                            <input type="text" class="col form-control ${(textError??)?string('is-invalid','')}"  placeholder="Кількість товарів" name="count" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                        </div>
+                        <input class="mt-1" type="hidden" name="product" value="${product.id}">
+                        <input class="mt-1" type="hidden" name="_csrf" value="${_csrf.token}" />
+                        <button class="btn btn-primary mr-2 ml-4 col-sm-3" type="submit">В корзину</button>
                     </div>
-                <input class="mt-1" type="hidden" name="product" value="${product.id}">
-                <input class="mt-1" type="hidden" name="_csrf" value="${_csrf.token}" />
-                <button class="btn btn-primary mr-2 ml-4 col-sm-3" type="submit">В корзину</button>
-                </div>
-            </form>
+                </form>
             </#if>
 
             <#if isAdmin>
-            <a type="button"  href="/product/edit/${product.id}" class="btn btn-secondary mt-2">Редагувати товар</a>
+                <a type="button"  href="/product/edit/${product.id}" class="btn btn-secondary mt-2">Редагувати товар</a>
             </#if>
         </label>
 
@@ -64,15 +64,15 @@
         </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>${product.subtitle!}</td>
-                <td>${product.consist!}</td>
-                <td>${product.descriptions!}</td>
-                <td>${product.producer!}</td>
-                <td>${product.weight!} кг.</td>
-                <td>${product.price!} грн.</td>
-                <td>${product.evaluationForm!}</td>
-            </tr>
+        <tr>
+            <td>${product.subtitle!}</td>
+            <td>${product.consist!}</td>
+            <td>${product.descriptions!}</td>
+            <td>${product.producer!}</td>
+            <td>${product.weight!} кг.</td>
+            <td>${product.price!} грн.</td>
+            <td>${product.evaluationForm!}</td>
+        </tr>
         </tbody>
     </table>
 
